@@ -2,7 +2,7 @@
 
 A CLI tool for extracting design tokens and brand assets from any website. Powered by Playwright with advanced bot detection avoidance.
 
-<video src="showcase.mov" controls></video>
+![Dembrandt Demo](showcase.gif)
 
 ## Quick Start
 
