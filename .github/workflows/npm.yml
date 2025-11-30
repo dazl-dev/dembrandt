@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [main]
+jobs:
+  npm:
+    runs-on: ubuntu-latest-arm
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          registry-url: "https://registry.npmjs.org/"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pack npm package
+        run: |
+          mkdir -p npm-package
+          cp package.json package-lock.json npm-package/
+          cp index.js npm-package/
+          cp -r lib/ npm-package/
+          cp README.md LICENSE npm-package/ 2>/dev/null || true
+
+      - run: npx pleb@8 publish
+        working-directory: ./npm-package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: actions/upload-artifact@v5
+        with:
+          path: npm-package
