@@ -15,8 +15,7 @@
     "start": "node index.js",
     "brand-challenge": "node run-no-login-challenge.mjs",
     "brand-challenge:report": "node run-no-login-challenge.mjs || true",
-    "install-browser": "npx playwright install chromium",
-    "release": "./release.sh"
+    "install-browser": "npx playwright install chromium"
   },
   "keywords": [
     "design-tokens",
